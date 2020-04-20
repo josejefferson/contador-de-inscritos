@@ -28,6 +28,27 @@ const presetMobileValues = {
 	}
 }
 
+$(window).scroll(() => {
+	if ($(window).scrollTop() > $("#customization").offset().top) {
+		$('#floatingStart').fadeIn();
+	} else {
+		$('#floatingStart').fadeOut();
+	}
+});
+
+$('#findChan').on('paste keyup', function() {
+	try {
+		let url = new URL($(this).val());
+		if (url.href.includes('youtube.com/channel/') || url.href.includes('youtube.com/user/')) {
+			let chunks = url.pathname.split('/');
+			let channelInfo = chunks[2];
+			$(this).val(channelInfo);
+			channelInfo.length == 24 && $('#searchTypeID').prop('checked', true);
+			channelInfo.length != 24 && $('#searchTypeUsername').prop('checked', true);
+		}
+	} catch {}
+});
+
 var vue = new Vue({
 	el: 'body',
 	data: {
