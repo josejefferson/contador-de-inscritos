@@ -1,3 +1,14 @@
+#floatingStart {
+	bottom: 10px;
+	height: 48px;
+	padding: 0 !important;
+	position: fixed;
+	right: 10px;
+	text-align: center;
+	width: 48px;
+	z-index: 1;
+}
+
 .pcr-button:after {
 	border: #000 2px solid;
 }
