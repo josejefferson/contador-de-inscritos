@@ -1,0 +1,17 @@
+{
+	"name": "Contador de inscritos para YouTube",
+	"short_name": "Contador de inscritos para YouTube",
+	"description": "",
+	"icons": [
+		{
+			"src": "src/icon.png",
+			"type": "image/png",
+			"sizes": "192x192"
+		}
+	],
+	"start_url": "index.html",
+	"scope": ".",
+	"display": "standalone",
+	"background_color": "#ffffff",
+	"theme_color": "#ffffff"
+}
