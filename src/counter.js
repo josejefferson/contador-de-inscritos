@@ -1,5 +1,3 @@
-eruda.init();
-
 const defaultAPIKey = "AIzaSyAwdIyQX7-nEsdG-Fs-A8uWuFxmROXJi9w";
 var defaultTitle = document.title;
 var info = {};
