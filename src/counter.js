@@ -150,7 +150,7 @@ function buildManifest() {
 				sizes: "240x240"
 			}
 		],
-		start_url: window.location.pathname + window.location.search,
+		start_url: window.location.search,
 		scope: ".",
 		display: "standalone",
 		background_color: "#ffffff",
