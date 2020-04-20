@@ -138,10 +138,14 @@ function presetDesktop() {
 	}
 }
 
-function presetMobile() {
-	if (confirm("AVISO: Se você aplicar este preset, todas as suas personalizações serão perdidas. Continuar?")) {
+function presetMobile(skipConfirm = false) {
+	if (skipConfirm || confirm("AVISO: Se você aplicar este preset, todas as suas personalizações serão perdidas. Continuar?")) {
 		presetMobileValues.checks.forEach(id => $(id).prop("checked", true));
 		for (id in presetMobileValues.values) { $(id).val(presetMobileValues.values[id]) }
 		resetForm();
 	}
+}
+
+if (window.innerWidth <= 768) {
+	presetMobile(true);
 }
