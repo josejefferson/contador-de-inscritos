@@ -7,7 +7,8 @@ var error = false;
 var cursor = true;
 const tips = ["No seu computador, pressione Ctrl + D para salvar seu contador como favorito",
 	"Clique duas vezes para entrar em tela cheia",
-	"Clique com o botão direito do mouse para ocultar o ponteiro"]
+	"Clique com o botão direito do mouse para ocultar o ponteiro",
+	"Você pode adicionar o contador à tela inicial"]
 
 $('body').dblclick(fullscreen);
 $('body').contextmenu(() => {
@@ -32,6 +33,7 @@ window.onload = async () => {
 	!error && setDataURLs();
 	!error && await getChannelData();
 	!error && writeSettings();
+	!error && buildManifest();
 	!error && startSubCounter();
 }
 
@@ -134,6 +136,31 @@ function writeSettings() {
 		"font-size": `${info.nameSize}px`
 	});
 	$('head').append(`<style>${info.customCSS}</style>`);
+}
+
+function buildManifest() {
+	let manifest = {
+		name: `Contador de inscritos de ${info.name}`,
+		short_name: "Contador de inscritos",
+		description: "lol",
+		icons: [
+			{
+				src: info.chanThumb,
+				type: "image/jpg",
+				sizes: "240x240"
+			}
+		],
+		start_url: window.location.pathname + window.location.search,
+		scope: ".",
+		display: "standalone",
+		background_color: "#ffffff",
+		"theme_color": "#ffffff"
+	}
+
+	let manifestJSON = JSON.stringify(manifest);
+	let manifestURI = encodeURIComponent(manifestJSON);
+	let manifestURL = `data:application/json,${manifestURI}`;
+	$('head').append(`<link rel="manifest" href="${manifestURL}">`);
 }
 
 function startSubCounter() {
