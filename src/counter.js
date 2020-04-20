@@ -140,8 +140,8 @@ function writeSettings() {
 
 function buildManifest() {
 	let manifest = {
-		name: `Contador de inscritos de ${info.name}`,
-		short_name: "Contador de inscritos",
+		name: "Contador de inscritos",
+		short_name: `Contador de inscritos de ${info.name}`,
 		description: "lol",
 		icons: [
 			{
