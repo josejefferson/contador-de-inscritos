@@ -29,7 +29,7 @@ const presetMobileValues = {
 }
 
 $(window).scroll(() => {
-	if ($(window).scrollTop() > $("#customization").offset().top) {
+	if ($(window).scrollTop() > $("#startCounter").offset().top + $("#startCounter").outerHeight()) {
 		$('#floatingStart').fadeIn();
 	} else {
 		$('#floatingStart').fadeOut();
