@@ -1,0 +1,7 @@
+.pcr-button:after {
+	border: #000 2px solid;
+}
+
+#customCSS {
+	font-family: monospace;
+}
