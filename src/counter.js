@@ -73,6 +73,8 @@ async function getChannel() {
 
 		await $.getJSON(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&maxResults=1&q=${info.findChan}&key=${info.apiKey || defaultAPIKey}`, data => {
 			if (data["pageInfo"]["totalResults"] != 0) {
+				replaceQuery("searchType", "id");
+				replaceQuery("findChan", data['items'][0]['id']['channelId']);
 				info.searchType = "id";
 				info.findChan = data['items'][0]['id']['channelId'];
 			} else {
@@ -197,6 +199,13 @@ function getSubs() {
 	});
 
 	$('#loadingScreen').fadeOut(200);
+}
+
+function replaceQuery(param, value) {
+	let urlQuery = new URLSearchParams(window.location.search);
+	urlQuery.set(param, value);
+    let newURL = window.location.origin + window.location.pathname + "?" + urlQuery.toString();
+    window.history.pushState({ path: newURL }, '', newURL);
 }
 
 function showError(text, details) {
