@@ -9,7 +9,7 @@ try {
 
 		let mkCounter = new URLSearchParams();
 		mkCounter.set('findChan', channelInfo);
-		mkCounter.set('searchType', channelInfo.length == 24 ? "id" : "username");
+		mkCounter.set('findBy', channelInfo.length == 24 ? "id" : "username");
 
 		if (window.innerWidth <= 768) {
 			mkCounter.set('thumbSize', '150');

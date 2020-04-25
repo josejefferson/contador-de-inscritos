@@ -62,20 +62,20 @@ function repairParams() {
 	!info.apiKey && (info.apiKey = "")
 	!info.customCSS && (info.customCSS = "");
 
-	!["name", "username", "id"].includes(info.searchType) && (info.searchType = "name");
+	!["name", "username", "id"].includes(info.findBy) && (info.findBy = "name");
 	!["solid", "url", "chanThumb"].includes(info.bgType) && (info.bgType = "chanThumb");
 	!["left", "top"].includes(info.thumbPosition) && (info.thumbPosition = "top");
 }
 
 async function getChannel() {
-	if (info.searchType == "name") {
+	if (info.findBy == "name") {
 		$("#loadingMessage").text("Procurando canal");
 
 		await $.getJSON(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&maxResults=1&q=${info.findChan}&key=${info.apiKey || defaultAPIKey}`, data => {
 			if (data["pageInfo"]["totalResults"] != 0) {
-				replaceQuery("searchType", "id");
+				replaceQuery("findBy", "id");
 				replaceQuery("findChan", data['items'][0]['id']['channelId']);
-				info.searchType = "id";
+				info.findBy = "id";
 				info.findChan = data['items'][0]['id']['channelId'];
 			} else {
 				showError("Não foi possível localizar o canal", "Tente verificar se você digitou o nome/nome de usuário/ID do canal corretamente");
@@ -88,8 +88,8 @@ async function getChannel() {
 }
 
 function setDataURLs() {
-	info.searchType == "username" && (info.channelInfoURL = `https://www.googleapis.com/youtube/v3/channels?part=contentDetails,snippet&forUsername=${info.findChan}&key=${info.apiKey || defaultAPIKey}`);
-	info.searchType == "id" && (info.channelInfoURL = `https://www.googleapis.com/youtube/v3/channels?part=contentDetails,snippet&id=${info.findChan}&key=${info.apiKey || defaultAPIKey}`);
+	info.findBy == "username" && (info.channelInfoURL = `https://www.googleapis.com/youtube/v3/channels?part=contentDetails,snippet&forUsername=${info.findChan}&key=${info.apiKey || defaultAPIKey}`);
+	info.findBy == "id" && (info.channelInfoURL = `https://www.googleapis.com/youtube/v3/channels?part=contentDetails,snippet&id=${info.findChan}&key=${info.apiKey || defaultAPIKey}`);
 }
 
 async function getChannelData() {
@@ -176,8 +176,8 @@ function stopSubCounter() {
 function getSubs() {
 	$("#loadingMessage").text("Verificando número de inscritos do canal");
 
-	info.searchType == 'id' && (dataURL = `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${info.findChan}&key=${info.apiKey || defaultAPIKey}`);
-	info.searchType == 'username' && (dataURL = `https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=${info.findChan}&key=${info.apiKey || defaultAPIKey}`);
+	info.findBy == 'id' && (dataURL = `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${info.findChan}&key=${info.apiKey || defaultAPIKey}`);
+	info.findBy == 'username' && (dataURL = `https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=${info.findChan}&key=${info.apiKey || defaultAPIKey}`);
 
 	$.getJSON(dataURL, data => {
 		let count = data.items[0].statistics.subscriberCount;

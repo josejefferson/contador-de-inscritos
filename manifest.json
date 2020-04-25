@@ -1,7 +1,7 @@
 {
-	"name": "Contador de inscritos para YouTube",
-	"short_name": "Contador de inscritos para YouTube",
-	"description": "",
+	"name": "Contador de inscritos",
+	"short_name": "Contador de inscritos",
+	"description": "Contador de inscritos para YouTube personalizável",
 	"icons": [
 		{
 			"src": "icons/icon.png",

@@ -1,5 +1,13 @@
 if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('sw.js');
+
+	window.addEventListener('beforeinstallprompt', e => {
+		if (localStorage.getItem('installPrompt')) {
+			e.preventDefault()
+		} else {
+			localStorage.setItem('installPrompt', 'true')
+		}
+	})
 }
 
 const presetDesktopValues = {
@@ -47,8 +55,8 @@ $('#findChan').on('paste keyup', function() {
 			let chunks = url.pathname.split('/');
 			let channelInfo = chunks[2];
 			$(this).val(channelInfo);
-			channelInfo.length == 24 && $('#searchTypeID').prop('checked', true);
-			channelInfo.length != 24 && $('#searchTypeUsername').prop('checked', true);
+			channelInfo.length == 24 && $('#findByID').prop('checked', true);
+			channelInfo.length != 24 && $('#findByUsername').prop('checked', true);
 		}
 	} catch {}
 });
