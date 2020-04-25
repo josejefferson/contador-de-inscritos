@@ -1,3 +1,7 @@
+if (new URLSearchParams(window.location.search).get('pwa') !== null) {
+	$('form').removeAttr('target');
+}
+
 if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('sw.js');
 
