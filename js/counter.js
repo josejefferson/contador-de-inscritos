@@ -144,7 +144,7 @@ function buildManifest() {
 	let manifest = {
 		name: "Contador de inscritos",
 		short_name: `Contador de inscritos de ${info.name}`,
-		description: "lol",
+		description: "",
 		icons: [
 			{
 				src: info.chanThumb,
@@ -156,7 +156,7 @@ function buildManifest() {
 		scope: ".",
 		display: "standalone",
 		background_color: "#ffffff",
-		"theme_color": "#ffffff"
+		theme_color: "#ffffff"
 	}
 
 	let manifestJSON = JSON.stringify(manifest);
