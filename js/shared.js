@@ -3,7 +3,7 @@ var chanURL = urlParams.get('sharedText');
 
 try {
 	let chURL = new URL(chanURL);
-	if (chURL.href.includes('youtube.com/channel/') || chURL.href.includes('youtube.com/user/')) {
+	if (chURL.href.includes('youtube.com/channel/') || chURL.href.includes('youtube.com/user/') || chURL.href.includes('youtube.com/c/')) {
 		let chunks = chURL.pathname.split('/');
 		let channelInfo = chunks[2];
 
