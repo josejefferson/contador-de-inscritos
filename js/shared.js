@@ -2,14 +2,31 @@ var urlParams = new URLSearchParams(window.location.search);
 var chanURL = urlParams.get('sharedText');
 
 try {
-	let chURL = new URL(chanURL);
-	if (chURL.href.includes('youtube.com/channel/') || chURL.href.includes('youtube.com/user/') || chURL.href.includes('youtube.com/c/')) {
-		let chunks = chURL.pathname.split('/');
-		let channelInfo = chunks[2];
+	const chURL = new URL(chanURL);
+	if (chURL.href.includes('youtube.com/channel/') || // ID
+		chURL.href.includes('youtube.com/c/') || // Custom URL
+		chURL.href.includes('youtube.com/user/') || // User
+		chURL.href.includes('youtube.com/')) { // Custom URL
+
+		const chunks = chURL.pathname.split('/');
+		if (chunks.length != 2) {
+			var urlType = chunks[1];
+			var channelInfo = chunks[2];
+		} else {
+			if (['watch', 'playlist'].includes(chunks[1])) throw ''
+			var urlType = 'c'
+			var channelInfo = chunks[1]
+		}
+
+		switch (urlType) {
+			case 'channel': var findBy = 'id'; break; // ID
+			case 'user': var findBy = 'username'; break; // User
+			case 'c': var findBy = 'name'; break; // Custom URL
+		}
 
 		let mkCounter = new URLSearchParams();
 		mkCounter.set('findChan', channelInfo);
-		mkCounter.set('findBy', channelInfo.length == 24 ? "id" : "username");
+		mkCounter.set('findBy', findBy);
 
 		if (window.innerWidth <= 768) {
 			mkCounter.set('thumbSize', '150');

@@ -52,17 +52,33 @@ $(window).scroll(() => {
 	}
 });
 
-$('#findChan').on('paste keyup', function() {
+$('#findChan').on('paste keyup', function () {
 	try {
-		let url = new URL($(this).val());
-		if (url.href.includes('youtube.com/channel/') || url.href.includes('youtube.com/user/')) {
-			let chunks = url.pathname.split('/');
-			let channelInfo = chunks[2];
+		let chURL = new URL($(this).val());
+		if (chURL.href.includes('youtube.com/channel/') || // ID
+			chURL.href.includes('youtube.com/c/') || // Custom URL
+			chURL.href.includes('youtube.com/user/') || // User
+			chURL.href.includes('youtube.com/')) { // Custom URL
+
+			const chunks = chURL.pathname.split('/');
+			if (chunks.length != 2) {
+				var urlType = chunks[1];
+				var channelInfo = chunks[2];
+			} else {
+				if (['watch', 'playlist'].includes(chunks[1])) throw ''
+				var urlType = 'c'
+				var channelInfo = chunks[1]
+			}
+
+			switch (urlType) {
+				case 'channel': $('#findByID').prop('checked', true); break; // ID
+				case 'user': $('#findByUsername').prop('checked', true); break; // User
+				case 'c': $('#findByName').prop('checked', true); break; // Custom URL
+			}
+
 			$(this).val(channelInfo);
-			channelInfo.length == 24 && $('#findByID').prop('checked', true);
-			channelInfo.length != 24 && $('#findByUsername').prop('checked', true);
-		}
-	} catch {}
+		} else { throw '' }
+	} catch { }
 });
 
 var vue = new Vue({
