@@ -1,4 +1,4 @@
-const defaultAPIKey = "AIzaSyAwdIyQX7-nEsdG-Fs-A8uWuFxmROXJi9w";
+const defaultAPIKey = "AIzaSyA5Ah-LmpfLlzfyLtPcvKKye5rsKb9buIw";
 var defaultTitle = document.title;
 var info = {};
 var subsTimer;
