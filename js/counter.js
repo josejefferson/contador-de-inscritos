@@ -1,4 +1,4 @@
-const defaultAPIKey = "AIzaSyA5Ah-LmpfLlzfyLtPcvKKye5rsKb9buIw";
+const defaultAPIKey = "QUl6YVN5QTVBaC1MbXBmTGx6ZnlMdFBjdktLeWU1cnNLYjlidUl3";
 var defaultTitle = document.title;
 var info = {};
 var subsTimer;
@@ -65,7 +65,7 @@ async function getChannel() {
 	if (info.findBy == "name") {
 		$("#loadingMessage").text("Procurando canal");
 
-		await $.getJSON(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&maxResults=1&q=${info.findChan}&key=${info.apiKey || defaultAPIKey}`, data => {
+		await $.getJSON(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&maxResults=1&q=${info.findChan}&key=${info.apiKey || atob(defaultAPIKey)}`, data => {
 			if (data["pageInfo"]["totalResults"] != 0) {
 				replaceQuery("findBy", "id");
 				replaceQuery("findChan", data['items'][0]['id']['channelId']);
@@ -85,8 +85,8 @@ async function getChannel() {
 }
 
 function setDataURLs() {
-	info.findBy == "username" && (info.channelInfoURL = `https://www.googleapis.com/youtube/v3/channels?part=contentDetails,snippet&forUsername=${info.findChan}&key=${info.apiKey || defaultAPIKey}`);
-	info.findBy == "id" && (info.channelInfoURL = `https://www.googleapis.com/youtube/v3/channels?part=contentDetails,snippet&id=${info.findChan}&key=${info.apiKey || defaultAPIKey}`);
+	info.findBy == "username" && (info.channelInfoURL = `https://www.googleapis.com/youtube/v3/channels?part=contentDetails,snippet&forUsername=${info.findChan}&key=${info.apiKey || atob(defaultAPIKey)}`);
+	info.findBy == "id" && (info.channelInfoURL = `https://www.googleapis.com/youtube/v3/channels?part=contentDetails,snippet&id=${info.findChan}&key=${info.apiKey || atob(defaultAPIKey)}`);
 }
 
 async function getChannelData() {
@@ -178,8 +178,8 @@ function stopSubCounter() {
 function getSubs() {
 	$("#loadingMessage").text("Verificando número de inscritos do canal");
 
-	info.findBy == 'id' && (dataURL = `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${info.findChan}&key=${info.apiKey || defaultAPIKey}`);
-	info.findBy == 'username' && (dataURL = `https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=${info.findChan}&key=${info.apiKey || defaultAPIKey}`);
+	info.findBy == 'id' && (dataURL = `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${info.findChan}&key=${info.apiKey || atob(defaultAPIKey)}`);
+	info.findBy == 'username' && (dataURL = `https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=${info.findChan}&key=${info.apiKey || atob(defaultAPIKey)}`);
 
 	$.getJSON(dataURL, data => {
 		let count = data.items[0].statistics.subscriberCount;
