@@ -75,8 +75,11 @@ async function getChannel() {
 				showError("Não foi possível localizar o canal", "Tente verificar se você digitou o nome/nome de usuário/ID do canal corretamente");
 			}
 		}).fail(err => {
-			err.status == "403" && showError(`Erro de autorização (${err.status} ${err.statusText})`, "O YouTube limita a 10000 consultas ao seu servidor por dia\nTente inserir uma chave de API sua");
-			err.status != "403" && showError(`Erro ${err.status} ${err.statusText}`, "Sem detalhes sobre este erro");
+			switch (err.status) {
+				case '400': showError(`Erro de autorização (${err.status})`, "O YouTube limita a 10000 consultas ao seu servidor por dia\nTente inserir uma chave de API sua"); break;
+				case '403': showError(`Erro de autorização (${err.status})`, "A chave de API é inválida"); break;
+				default: showError(`Erro ${err.status}`, "Sem detalhes sobre este erro"); break;
+			}
 		});
 	}
 }
@@ -97,8 +100,11 @@ async function getChannelData() {
 			showError("Não foi possível localizar o canal", "Tente verificar se você digitou o nome/nome de usuário/ID do canal corretamente");
 		}
 	}).fail(err => {
-		err.status == "403" && showError(`Erro de autorização (${err.status} ${err.statusText})`, "O YouTube limita a 10000 consultas ao seu servidor por dia\nTente inserir uma chave de API sua");
-		err.status != "403" && showError(`Erro ${err.status} ${err.statusText}`, "Sem detalhes sobre este erro");
+		switch (err.status) {
+			case '400': showError(`Erro de autorização (${err.status})`, "O YouTube limita a 10000 consultas ao seu servidor por dia\nTente inserir uma chave de API sua"); break;
+			case '403': showError(`Erro de autorização (${err.status})`, "A chave de API é inválida"); break;
+			default: showError(`Erro ${err.status}`, "Sem detalhes sobre este erro"); break;
+		}
 	})
 }
 
