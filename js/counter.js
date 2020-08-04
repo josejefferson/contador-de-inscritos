@@ -195,6 +195,7 @@ function getSubs() {
 	});
 
 	$('#loadingScreen').fadeOut(200);
+	$('meta[name=theme-color]').attr('content', '#000000');
 }
 
 function replaceQuery(param, value) {
@@ -211,6 +212,7 @@ function showError(text, details) {
 	});
 	$("#loadingSpinner").addClass("hidden");
 	$("#loadingError").removeClass("hidden");
+	$('meta[name=theme-color]').attr('content', '#e0e0e0');
 }
 
 function fullscreen() {
