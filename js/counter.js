@@ -4,7 +4,6 @@ var info = {};
 var subsTimer;
 var attempts = 0;
 var error = false;
-var cursor = true;
 const tips = ["No seu computador, pressione Ctrl + D para salvar seu contador como favorito",
 	"Clique duas vezes para entrar em tela cheia",
 	"Clique com o botão direito do mouse para ocultar o ponteiro",
@@ -12,15 +11,8 @@ const tips = ["No seu computador, pressione Ctrl + D para salvar seu contador co
 
 $('body').dblclick(fullscreen);
 $('body').contextmenu(() => {
-	if (cursor == true) {
-		$('*').css('cursor', 'none');
-		cursor = false;
-		return false;
-	} else {
-		$('*').css('cursor', 'auto');
-		cursor = true;
-		return false;
-	}
+	$('body').toggleClass('cursorHidden');
+	return false;
 });
 $('#tip').text(`Dica: ${tips[Math.floor(Math.random() * tips.length)]}`);
 $("#errorGetSubs").click(() => alert("Ocorreu um erro ao atualizar o contador de inscritos. Talvez o contador esteja desatualizado"));
@@ -56,6 +48,8 @@ function repairParams() {
 	!info.thumbMargin && (info.thumbMargin = "10");
 	!info.nameSize && (info.nameSize = "50");
 	!info.counterSize && (info.counterSize = "120");
+	!info.nameFont && (info.nameFont = "");
+	!info.counterFont && (info.counterFont = "");
 	!info.counterMargin && (info.counterMargin = "100");
 	!info.nameColor && (info.nameColor = "#FFFFFF");
 	!info.counterColor && (info.counterColor = "#FFFFFF");
@@ -125,7 +119,8 @@ function writeSettings() {
 	$('.countContainer').css('margin-top', `${info.counterMargin}px`);
 	$('.odometer').css({
 		"color": info.counterColor,
-		"font-size": `${info.counterSize}px`
+		"font-size": `${info.counterSize}px`,
+		"font-family": info.counterFont
 	});
 	$('.chanThumb').css({
 		"border-radius": `${info.thumbRadius}%`,
@@ -135,7 +130,8 @@ function writeSettings() {
 	$('.imgLeft .chanThumb').css('margin-right', `${info.thumbMargin}px`);
 	$('.name').css({
 		"color": info.nameColor,
-		"font-size": `${info.nameSize}px`
+		"font-size": `${info.nameSize}px`,
+		"font-family": info.nameFont
 	});
 	$('head').append(`<style>${info.customCSS}</style>`);
 }

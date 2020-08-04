@@ -5,6 +5,10 @@ body {
 	user-select: none;
 }
 
+body.cursorHidden {
+	cursor: none;
+}
+
 #loadingScreen {
 	align-items: center;
 	background: #e0e0e0;

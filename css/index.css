@@ -13,8 +13,13 @@
 	z-index: 1;
 }
 
-.pcr-button:after {
-	border: #000 2px solid;
+input[type=color].form-control {
+	padding: 3px 5px;
+}
+
+input[type=color].form-control::-webkit-color-swatch {
+	border: gray 1px solid;
+	border-radius: 2px;
 }
 
 #customCSS {
