@@ -14,6 +14,11 @@ if ('serviceWorker' in navigator) {
 	})
 }
 
+if (localStorage.getItem('newSubCounterDismiss') != 'true')
+	$('.newSubCounter').removeClass('hidden')
+
+$('.newSubCounterClose').click(() => localStorage.setItem('newSubCounterDismiss', 'true'))
+
 const presets = {
 	'desktop': {
 		checks: ['#bgTypeChanThumb', '#thumbPositionTop', '#thumbRadiusCircle'],

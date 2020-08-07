@@ -25,3 +25,7 @@ input[type=color].form-control::-webkit-color-swatch {
 #customCSS {
 	font-family: monospace;
 }
+
+.hidden {
+	display: none !important;
+}
